@@ -1,16 +1,42 @@
+require 'csv'
+
 class WordGuess
   def initialize(debug = false)
     # are we in debug mode?
     @debug = debug
 
+    #medium, easy, hard
+    easy_words = []
+    medium_words = []
+    hard_words = []
+
+    csv = CSV.read("words.csv", "r")
+
+    easy_words += csv[1]
+    medium_words += csv[0]
+    hard_words += csv[2]
+
+    # counter = 1
+    # 
+    # CSV.foreach("words.csv") do |row|
+    #   if counter == 1
+    #     medium_words += row
+    #     counter += 1
+    #   elsif counter == 2
+    #     easy_words += row
+    #     counter += 1
+    #   elsif counter == 3
+    #     hard_words += row
+    #   end
+    # end
+
+    print hard_words
+
     # possible words, selected at random
     @words = {
-      "e" => %w(dog cat bug hat cap lit kin fan fin fun tan ten tin ton),
-      "m" => %w(plain claim brine crime alive bride skine drive slime stein jumpy),
-      "h" => %w(
-          machiavellian prestidigitation plenipotentiary quattuordecillion
-          magnanimous unencumbered bioluminescent circumlocution
-        )
+      "e" => easy_words.shift,
+      "m" => medium_words.shift,
+      "h" => hard_words.shift
     }
 
     # players attempts allowed by difficulty
