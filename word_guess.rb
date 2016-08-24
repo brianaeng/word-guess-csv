@@ -17,20 +17,43 @@ class WordGuess
     hard_words += csv[2]
 
     # counter = 1
-    # 
+    #
     # CSV.foreach("words.csv") do |row|
     #   if counter == 1
     #     medium_words += row
-    #     counter += 1
     #   elsif counter == 2
     #     easy_words += row
-    #     counter += 1
     #   elsif counter == 3
     #     hard_words += row
     #   end
+    #   counter += 1
     # end
 
-    print hard_words
+    # Example solutions from class
+
+    #Example 1
+    CSV.open("word.csv", "r") do |line|
+      if line[0] == "e"
+        @words["e"] = line.drop(1) #says we want to drop one element off the front
+      elsif line[0] == "m"
+        @words["m"] == lines.drop(1)
+      elsif line[0] == "h"
+        @word["h"] == lines.drop(1)
+      end
+    end
+
+   #Example 2
+   csv = CSV.read("words.csv")
+
+   difficulty_levels_hash = {}
+
+   csv.each do |line|
+     difficulty_level = line[0]
+     line.delete_at(0)
+     difficulty_levels_hash[difficulty_level] = line
+   end
+
+   @words = difficulty_levels_hash
 
     # possible words, selected at random
     @words = {
